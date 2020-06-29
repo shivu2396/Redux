@@ -48,24 +48,19 @@ const App = () => {
       signIn: async (userName, password) => {
         let userToken;
         userToken = null;
-        if (userName == 'User' && password == 'Pass') {
+        if (userName == 'Shivani' && password == '123') {
           try {
             userToken = ' ';
-         
+
             await AsyncStorage.setItem('userToken', userToken);
-          } catch (e) {
-           
-          }
+          } catch (e) {}
         } else {
-         
         }
         console.log('user Token', userToken);
         dispatch({ type: 'SIGN_IN', id: userName, token: userToken });
       },
       logOut: async () => {
-      
         try {
-        
           await AsyncStorage.removeItem('userToken');
         } catch (e) {
           console.log('catch', e);
@@ -78,18 +73,17 @@ const App = () => {
 
   React.useEffect(() => {
     const bootstrapAsync = async () => {
-    
       let userToken;
       userToken = null;
       try {
         userToken = await AsyncStorage.getItem('userToken');
-       
       } catch (e) {
         console.log('catch effect', e);
       }
       console.log('user Token effect', userToken);
       dispatch({ type: 'RETRIEVE_TOKEN', token: userToken });
-    }, 
+    };
+    bootstrapAsync();
   }, []);
 
   return (
